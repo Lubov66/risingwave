@@ -907,6 +907,7 @@ impl MetadataManager {
         &self,
         job: &StreamingJob,
     ) -> MetaResult<NotificationVersion> {
+        tracing::info!("wait_streaming_job_finished: {job:?}");
         match self {
             MetadataManager::V1(mgr) => mgr.wait_streaming_job_finished(job).await,
             MetadataManager::V2(mgr) => mgr.wait_streaming_job_finished(job.id() as _).await,
